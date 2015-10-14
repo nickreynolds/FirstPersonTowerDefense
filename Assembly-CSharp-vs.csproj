@@ -394,6 +394,7 @@
      <Compile Include="Assets\OVR\Scripts\OVRCameraRig.cs" />
      <Compile Include="Assets\OVR\Scripts\OVRCommon.cs" />
      <Compile Include="Assets\OVR\Scripts\OVRDisplay.cs" />
+     <Compile Include="Assets\OVR\Scripts\OVRInput.cs" />
      <Compile Include="Assets\OVR\Scripts\OVRManager.cs" />
      <Compile Include="Assets\OVR\Scripts\OVROnCompleteListener.cs" />
      <Compile Include="Assets\OVR\Scripts\OVRPlugin.cs" />
