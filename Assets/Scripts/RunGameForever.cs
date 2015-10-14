@@ -11,16 +11,23 @@ public class RunGameForever : MonoBehaviour
 	public int MIN_ENEMIES_TO_SPAWN;
 	public int MAX_ENEMIES_TO_SPAWN;
 
+	private int minEnemiesToSpawn;
+	private int maxEnemiesToSpawn;
+
 	public GameObject enemyToSpawnPrefab;
 	public List<GameObject> spawnedEnemies = new List<GameObject>();
 
 	public bool shouldSpawnEnemies;
+
+	public int waveNum = 0;
 
 	// Use this for initialization
 	void Start () 
 	{
 		StartCoroutine(spawnForever());
 		instance = this;
+		minEnemiesToSpawn = MIN_ENEMIES_TO_SPAWN;
+		maxEnemiesToSpawn = MAX_ENEMIES_TO_SPAWN;
 	}
 	
 	// Update is called once per frame
@@ -45,8 +52,15 @@ public class RunGameForever : MonoBehaviour
 				float startX = Mathf.Sin(angle) * distance;
 				float startZ = Mathf.Cos(angle) * distance;
 
-				int numEnemiesToSpawn = Random.Range(MIN_ENEMIES_TO_SPAWN, MAX_ENEMIES_TO_SPAWN);
-
+				int numEnemiesToSpawn = Random.Range(minEnemiesToSpawn, maxEnemiesToSpawn);
+				if (waveNum % 2 == 0)
+				{
+					minEnemiesToSpawn++;
+				}
+				else
+				{
+					maxEnemiesToSpawn++;
+				}
 				for(int i=0; i < numEnemiesToSpawn; i++)
 				{
 					GameObject enemyToSpawn = GameObject.Instantiate(enemyToSpawnPrefab) as GameObject;
@@ -57,7 +71,7 @@ public class RunGameForever : MonoBehaviour
 					enemyToSpawn.transform.position = new Vector3(startX + (i*2.0f), 4.0f, startZ + (i*2.0f));
 					spawnedEnemies.Add(enemyToSpawn);
 				}
-
+				waveNum++;
 				
 				float timeWait = Random.Range(MIN_TIME_TO_SPAWN, MAX_TIME_TO_SPAWN);
 				yield return new WaitForSeconds(timeWait);

@@ -32,6 +32,8 @@ public class Player : MonoBehaviour
 	private GameObject unAcceptableTower;
 	public GameObject testTower;
 	public List<GameObject> instantiatedTowers;
+	public int TOWERS_TO_PLACE;
+	private int placedTowers = 0;
 
 	// pathfinding variables
 	public GameObject gameWorldGrid;
@@ -56,8 +58,17 @@ public class Player : MonoBehaviour
 
 	void OnGUI()
 	{
-		string hpText = "HP: " + hp;
-		GUI.Label(new Rect(topLeftCorner.x, topLeftCorner.y, size.x, size.y), hpText);
+		if (gameState == GAME_STATE.PLACING_TOWERS)
+		{
+			
+			string towerText = "TOWERS TO PLACE REMAINING: " + (TOWERS_TO_PLACE-placedTowers);
+			GUI.Label(new Rect(topLeftCorner.x, topLeftCorner.y, size.x, size.y), towerText);
+		}
+		else
+		{			
+			string hpText = "HP: " + hp + "\nWAVE:" + RunGameForever.instance.waveNum;
+			GUI.Label(new Rect(topLeftCorner.x, topLeftCorner.y, size.x, size.y), hpText);
+		}
 	}
 	
 	void Update()
@@ -89,15 +100,15 @@ public class Player : MonoBehaviour
 					testTower.transform.position = new Vector3(acceptableTower.transform.position.x, -1.0f, acceptableTower.transform.position.z);
 					instantiatedTowers.Add(testTower);
 					GridManager.instance.Update(testTower.GetComponent<BoxCollider>().bounds, 10);
+					placedTowers++;
+					if (placedTowers >= TOWERS_TO_PLACE)
+					{						
+						gameState = GAME_STATE.FIGHTING_WAVES;
+						//gc.automaticInitialization = true;
+						//gc.Disable(10);
+						StartCoroutine(startWave());
+					}
 				}
-			}
-
-			if (Input.GetMouseButtonDown(1))
-			{
-				gameState = GAME_STATE.FIGHTING_WAVES;
-				//gc.automaticInitialization = true;
-				//gc.Disable(10);
-				StartCoroutine(startWave());
 			}
 		}
 		else
