@@ -408,8 +408,10 @@
      <Compile Include="Assets\OVR\Scripts\Util\OVRScreenFade.cs" />
      <Compile Include="Assets\OVR\Scripts\Util\OVRTrackerBounds.cs" />
      <Compile Include="Assets\Scripts\DefenseTower.cs" />
+     <Compile Include="Assets\Scripts\DragAndTapFPSController.cs" />
      <Compile Include="Assets\Scripts\Enemy.cs" />
      <Compile Include="Assets\Scripts\NavigateToTowerEnemy.cs" />
+     <Compile Include="Assets\Scripts\OrientCameraAndTapFPSController.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\RunGameForever.cs" />
      <Compile Include="Assets\Scripts\TowerShot.cs" />

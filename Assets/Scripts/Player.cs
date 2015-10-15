@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using Apex;
@@ -6,6 +6,8 @@ using Apex.WorldGeometry;
 using Apex.Utilities;
 public class Player : MonoBehaviour 
 {
+	public static Player instance = null;
+
 	// player status varibales
 	public float STARTING_HP;
 	private float hp;
@@ -49,6 +51,7 @@ public class Player : MonoBehaviour
 		unAcceptableTower.transform.position = Vector3.zero;
 		gc = gameWorldGrid.GetComponent<GridComponent>();
 		cellSize = gc.grid.cellSize;
+		instance = this;
 	}
 
 	void FixedUpdate () 
@@ -61,7 +64,7 @@ public class Player : MonoBehaviour
 		if (gameState == GAME_STATE.PLACING_TOWERS)
 		{
 			
-			string towerText = "TOWERS TO PLACE REMAINING: " + (TOWERS_TO_PLACE-placedTowers);
+			string towerText = "TOWERS TO PLACE REMAINING: " + (TOWERS_TO_PLACE-placedTowers) + "\nGYRO: " + Input.gyro.attitude;
 			GUI.Label(new Rect(topLeftCorner.x, topLeftCorner.y, size.x, size.y), towerText);
 		}
 		else
@@ -93,22 +96,6 @@ public class Player : MonoBehaviour
 				zPoint = cellsZ * cellSize;
 
 				acceptableTower.transform.position = new Vector3(xPoint, -1.0f, zPoint);
-				if(Input.GetMouseButtonDown(0))
-				{
-					testTower = GameObject.Instantiate(acceptableTowerPrefab) as GameObject;
-					testTower.transform.position = hit.point;
-					testTower.transform.position = new Vector3(acceptableTower.transform.position.x, -1.0f, acceptableTower.transform.position.z);
-					instantiatedTowers.Add(testTower);
-					GridManager.instance.Update(testTower.GetComponent<BoxCollider>().bounds, 10);
-					placedTowers++;
-					if (placedTowers >= TOWERS_TO_PLACE)
-					{						
-						gameState = GAME_STATE.FIGHTING_WAVES;
-						//gc.automaticInitialization = true;
-						//gc.Disable(10);
-						StartCoroutine(startWave());
-					}
-				}
 			}
 		}
 		else
@@ -117,9 +104,29 @@ public class Player : MonoBehaviour
 			unAcceptableTower.transform.position = Vector3.zero;
 		}
 	}
+
+	public void placeTower()
+	{
+		testTower = GameObject.Instantiate(acceptableTowerPrefab) as GameObject;
+		testTower.transform.position = hit.point;
+		testTower.transform.position = new Vector3(acceptableTower.transform.position.x, -1.0f, acceptableTower.transform.position.z);
+		instantiatedTowers.Add(testTower);
+		GridManager.instance.Update(testTower.GetComponent<BoxCollider>().bounds, 10);
+		placedTowers++;
+		if (placedTowers >= TOWERS_TO_PLACE)
+		{						
+			gameState = GAME_STATE.FIGHTING_WAVES;
+			//gc.automaticInitialization = true;
+			//gc.Disable(10);
+			StartCoroutine(startWave());
+		}
+	}
+
 	private IEnumerator startWave()
 	{
 		yield return new WaitForSeconds(.5f);
 		RunGameForever.instance.shouldSpawnEnemies = true;
 	}
+
+
 }
