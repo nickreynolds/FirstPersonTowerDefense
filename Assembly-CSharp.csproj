@@ -411,6 +411,7 @@
      <Compile Include="Assets\Scripts\DragAndTapFPSController.cs" />
      <Compile Include="Assets\Scripts\Enemy.cs" />
      <Compile Include="Assets\Scripts\NavigateToTowerEnemy.cs" />
+     <Compile Include="Assets\Scripts\OculusInputController.cs" />
      <Compile Include="Assets\Scripts\OrientCameraAndTapFPSController.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\RunGameForever.cs" />

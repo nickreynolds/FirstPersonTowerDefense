@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _allowAutomaticUpdateCheck: 1
   _updateCheckIntervalHours: 12
-  _lastUpdateCheck: 10/15/2015 01:47:07
+  _lastUpdateCheck: 10/23/2015 05:32:15
   _updateCheckBaseUrl: http://apexgametoolsproductservice.azurewebsites.net
   _knownPendingUpdates:
   - Apex Mecanim Tutorial Project
