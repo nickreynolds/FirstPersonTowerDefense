@@ -480,8 +480,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 887907769}
-  - 114: {fileID: 887907771}
   - 114: {fileID: 887907770}
+  - 114: {fileID: 887907771}
   m_Layer: 0
   m_Name: Player
   m_TagString: MainCamera
@@ -517,8 +517,7 @@ MonoBehaviour:
 --- !u!114 &887907771
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11403780, guid: 6a7c568d6f8e88c49987aceee887ee8f,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 887907768}
   m_Enabled: 1
@@ -529,7 +528,7 @@ MonoBehaviour:
   STARTING_HP: 100
   gameState: 0
   topLeftCorner: {x: 10, y: 10}
-  size: {x: 100, y: 20}
+  size: {x: 300, y: 60}
   MAX_DIST_HIT: 75
   MIN_DIST_HIT: 0
   acceptableTowerPrefab: {fileID: 110740, guid: 230b6eec5d7b5a048ba1b3c522d69c19,
@@ -1267,6 +1266,14 @@ Prefab:
     - target: {fileID: 2000000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_RenderingPath
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: m_Constraints
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
